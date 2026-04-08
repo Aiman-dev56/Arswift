@@ -102,7 +102,7 @@ export default function Hero() {
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <Typography variant="h1" color="primary" className="lg:max-w-8xl w-60">{slide.title}</Typography>
+                            <Typography variant="h1" color="primary" className="lg:max-w-8xl lg:w-180 md:w-140 w-60">{slide.title}</Typography>
                             <Typography variant="h4" className="lg:w-full w-70" >{slide.description}</Typography>
                             <Button variant="primary" size="md" className="mt-4">{slide.button} </Button>
 
