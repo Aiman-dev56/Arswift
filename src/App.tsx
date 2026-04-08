@@ -3,9 +3,9 @@ import Hero from "./components/Hero";
 import JoinUs from "./components/JoinUs";
 import Logos from "./components/Logo";
 import ScrollBarProgress from "./components/ui/ScrollProgressBar";
-import Services from "./components/Services";
 import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
+import ScrollHeroSection from "./components/ScrollHeroSection";
 
 
 
@@ -15,8 +15,10 @@ export default function App() {
       <Toaster position="bottom-left" />
       <Header />
       <ScrollBarProgress />
-      <Hero />
-      <Services />
+      <div className="relative z-10">
+        <Hero />
+      </div>
+      <ScrollHeroSection />
       <Logos />
       <JoinUs />
 

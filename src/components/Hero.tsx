@@ -69,7 +69,7 @@ export default function Hero() {
     }, [next]);
 
     return (
-        <section id="hero" className="relative lg:min-h-screen  min-h-[60vh] md:min-h-[60vh] flex items-center overflow-hidden">
+        <section id="hero" className="relative lg:min-h-screen  min-h-[70vh] md:min-h-[60vh] flex items-center overflow-hidden">
 
             <AnimatePresence initial={false} custom={direction}>
                 <motion.div
@@ -102,8 +102,8 @@ export default function Hero() {
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <Typography variant="h1" color="primary" className="lg:max-w-8xl max-w-sm">{slide.title}</Typography>
-                            <Typography variant="h4">{slide.description}</Typography>
+                            <Typography variant="h1" color="primary" className="lg:max-w-8xl w-60">{slide.title}</Typography>
+                            <Typography variant="h4" className="lg:w-full w-70" >{slide.description}</Typography>
                             <Button variant="primary" size="md" className="mt-4">{slide.button} </Button>
 
                         </motion.div>
