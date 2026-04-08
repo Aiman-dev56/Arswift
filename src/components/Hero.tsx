@@ -33,12 +33,6 @@ export default function Hero() {
     const [current, setCurrent] = useState(0);
     const [direction, setDirection] = useState(1);
 
-    const goTo = useCallback((index: number) => {
-        setDirection(index > current ? 1 : -1);
-        setCurrent(index);
-
-    }, [current]);
-
     const next = useCallback(() => {
         setDirection(1);
         setCurrent((prev) => (prev + 1) % Slides.length);
