@@ -11,7 +11,8 @@ export default function SecondSec() {
     ];
 
     return (
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-20 px-4 sm:px-8 md:px-12 lg:px-20 lg:py-12 md:py-8">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-20 px-4 sm:px-8 md:px-12 lg:px-20 lg:py-12 md:py-8"
+            id="about">
 
             {/* LEFT — text content */}
             <div className="flex flex-col justify-center gap-4 w-full lg:w-1/2 text-center lg:text-left">

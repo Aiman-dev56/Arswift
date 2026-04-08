@@ -68,6 +68,7 @@ const ScrollHeroSection = () => {
         <div
             ref={sectionRef} className="lg:h-[600vh] md:h-[200vh] h-[600vh]"
             style={{ backgroundColor: "#CED4DA" }}
+            id="services"
         >
             {/* ✅ sticky goes HERE — child of the tall container */}
             <div className="sticky top-0 h-screen overflow-hidden">

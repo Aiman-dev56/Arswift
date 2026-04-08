@@ -27,7 +27,9 @@ export default function Footer() {
 
 
     return (
-        <footer className="bg-[#CED4DA] h-auto relative  overflow-visible">
+        <footer className="bg-[#CED4DA] h-auto relative  overflow-visible"
+            id="contact"
+        >
 
             <style>{`
         @keyframes pulse-fade {
