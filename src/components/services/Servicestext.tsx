@@ -1,143 +1,411 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Typography } from "../ui/Typography";
 import WordSwitcher from "../ui/WordSwitcher";
 
+gsap.registerPlugin(ScrollTrigger);
+
 interface Props {
-    progress: number;
-    isLarge: boolean;
+    scrollContainerRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const fade = (progress: number, from: number, dur: number) =>
-    Math.min(1, Math.max(0, (progress - from) / dur));
-const lerp = (start: number, end: number, t: number) =>
-    start + (end - start) * Math.min(1, Math.max(0, t));
+export const ServicesText = ({ scrollContainerRef }: Props) => {
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const subtext1Ref = useRef<HTMLParagraphElement>(null);
+    const leftColRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const rightColRef = useRef<HTMLDivElement>(null);
+    const serviceItemsRef = useRef<HTMLDivElement[]>([]);
 
-export const ServicesText = ({ progress, isLarge }: Props) => {
-    const phase3 = fade(progress, 0.35, 0.10);
+    useEffect(() => {
+        if (!scrollContainerRef?.current) return;
 
-    // Subtext 1
-    const subtext1Opacity = fade(progress, 0.20, 0.10);
-    const subtext1Translate = lerp(40, 0, subtext1Opacity);
-    const subtext1FadeOut = Math.max(0, 1 - fade(progress, 0.35, 0.08));
+        const ctx = gsap.context(() => {
+            const mm = gsap.matchMedia();
 
-    // Subtext 2
-    const subtext2Opacity = fade(progress, 0.50, 0.10);
-    const subtext2Translate = lerp(60, 0, subtext2Opacity);
+            // ── LARGE SCREENS ──
+            mm.add("(min-width: 1024px)", () => {
 
-    // Button
-    const buttonOpacity = fade(progress, 0.65, 0.2);
-    const buttonTranslate = lerp(30, 0, buttonOpacity);
+                // Subtext fades in early, holds, then fades out
+                gsap.fromTo(subtext1Ref.current,
+                    { opacity: 0, y: 40 },
+                    {
+                        opacity: 1, y: 0,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: scrollContainerRef.current,
+                            scroller: window,
+                            start: "10% bottom",
+                            end: "25% bottom",
+                            scrub: 3,
+                        },
+                    }
+                );
+                gsap.to(subtext1Ref.current, {
+                    opacity: 0, y: -20,
+                    ease: "power2.in",
+                    scrollTrigger: {
+                        trigger: scrollContainerRef.current,
+                        scroller: window,
+                        start: "28% bottom",
+                        end: "38% bottom",
+                        scrub: 3,
+                    },
+                });
 
-    // Right services list
-    const rightOpacity = Math.min(1, Math.max(0, (progress - 0.68) / 0.18));  // ← starts at 68% scroll, takes 18% to complete
-    const rightTranslate = lerp(80, 0, rightOpacity);
+                // Left col fades in
+                gsap.fromTo(leftColRef.current,
+                    { opacity: 0, y: 50 },
+                    {
+                        opacity: 1, y: 0,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: scrollContainerRef.current,
+                            scroller: window,
+                            start: "70% bottom",
+                            end: "82% bottom",
+                            scrub: 1,
+                        },
+                    }
+                );
+
+                // Button fades in
+                gsap.fromTo(buttonRef.current,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1, y: 0,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: scrollContainerRef.current,
+                            scroller: window,
+                            start: "80% bottom",
+                            end: "88% bottom",
+                            scrub: 1,
+                        },
+                    }
+                );
+
+                // Service items stagger in
+                serviceItemsRef.current.forEach((item, i) => {
+                    gsap.fromTo(item,
+                        { opacity: 0, y: 60 },
+                        {
+                            opacity: 1, y: 0,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: scrollContainerRef.current,
+                                scroller: window,
+                                start: `${88 + i * 10}% bottom`,
+                                end: `${90 + i * 10}% bottom`,
+                                scrub: 1,
+                            },
+                        }
+                    );
+                });
+            });
+
+            // ── MD 768px–1023px ──
+            mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
+
+                gsap.fromTo(subtext1Ref.current,
+                    { opacity: 0, y: 40 },
+                    {
+                        opacity: 1, y: 0,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: scrollContainerRef.current,
+                            scroller: window,
+                            start: "8% bottom",
+                            end: "28% bottom",
+                            scrub: 1,
+                        },
+                    }
+                );
+                gsap.to(subtext1Ref.current, {
+                    opacity: 0, y: -20,
+                    scrollTrigger: {
+                        trigger: scrollContainerRef.current,
+                        scroller: window,
+                        start: "32% bottom",
+                        end: "48% bottom",
+                        scrub: 1,
+                    },
+                });
+
+                gsap.fromTo(leftColRef.current,
+                    { opacity: 0, y: 50 },
+                    {
+                        opacity: 1, y: 0,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: scrollContainerRef.current,
+                            scroller: window,
+                            start: "50% bottom",
+                            end: "62% bottom",
+                            scrub: 1,
+                        },
+                    }
+                );
+
+                gsap.fromTo(buttonRef.current,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1, y: 0,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: scrollContainerRef.current,
+                            scroller: window,
+                            start: "58% bottom",
+                            end: "68% bottom",
+                            scrub: 1,
+                        },
+                    }
+                );
+
+                serviceItemsRef.current.forEach((item, i) => {
+                    gsap.fromTo(item,
+                        { opacity: 0, y: 50 },
+                        {
+                            opacity: 1, y: 0,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: scrollContainerRef.current,
+                                scroller: window,
+                                start: `${60 + i * 10}% bottom`,
+                                end: `${85 + i * 10}% bottom`,
+                                scrub: 1,
+                            },
+                        }
+                    );
+                });
+            });
+
+            // ── MOBILE < 768px ──
+            mm.add("(max-width: 767px)", () => {
+
+                gsap.fromTo(subtext1Ref.current,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1, y: 0,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: scrollContainerRef.current,
+                            scroller: window,
+                            start: "8% bottom",
+                            end: "18% bottom",
+                            scrub: 1,
+                        },
+                    }
+                );
+                gsap.to(subtext1Ref.current, {
+                    opacity: 0, y: -20,
+                    scrollTrigger: {
+                        trigger: scrollContainerRef.current,
+                        scroller: window,
+                        start: "28% bottom",
+                        end: "38% bottom",
+                        scrub: 1,
+                    },
+                });
+
+                gsap.fromTo(leftColRef.current,
+                    { opacity: 0, y: 40 },
+                    {
+                        opacity: 1, y: 0,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: scrollContainerRef.current,
+                            scroller: window,
+                            start: "50% bottom",
+                            end: "62% bottom",
+                            scrub: 1,
+                        },
+                    }
+                );
+
+                gsap.fromTo(buttonRef.current,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1, y: 0,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: scrollContainerRef.current,
+                            scroller: window,
+                            start: "60% bottom",
+                            end: "70% bottom",
+                            scrub: 1,
+                        },
+                    }
+                );
+
+                serviceItemsRef.current.forEach((item, i) => {
+                    gsap.fromTo(item,
+                        { opacity: 0, y: 40 },
+                        {
+                            opacity: 1, y: 0,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: scrollContainerRef.current,
+                                scroller: window,
+                                start: `${68 + i * 10}% bottom`,
+                                end: `${78 + i * 10}% bottom`,
+                                scrub: 1,
+                            },
+                        }
+                    );
+                });
+            });
+        });
+
+        return () => ctx.revert();
+    }, [scrollContainerRef]);
+
+    const services = [
+        {
+            title: "UI/UX Design",
+            description:
+                "Human-centric design that prioritizes user flow and aesthetic precision to make your software as beautiful as it is functional.",
+        },
+        {
+            title: "Web Development",
+            description:
+                "We build high-performance, responsive websites using the latest frameworks to ensure your digital presence is fast, secure, and scalable.",
+        },
+        {
+            title: "App Development",
+            description:
+                "From iOS to Android, we engineer native and cross-platform mobile experiences that provide seamless functionality and elite performance.",
+        },
+    ];
 
     return (
-        <>
-            {/* Subtext 1 — "Driving innovation..." */}
+        <div ref={wrapperRef} className="absolute inset-0 w-full h-full">
+
             <p
-                className="gradient-text absolute left-1/2 -translate-x-1/2 mt-10 text-center items-center max-w-lg text-lg sm:text-xl lg:text-2xl font-medium z-10"
+                ref={subtext1Ref}
+                className="
+                    absolute left-1/2 z-10
+                    text-center
+                    text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl
+                    font-medium text-gray-700
+                    max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg
+                    px-4 opacity-0
+                "
                 style={{
-                    top: isLarge ? "60%" : "24%",
-                    opacity: subtext1Opacity * subtext1FadeOut,
-                    transform: `translateY(-50%) translateY(${subtext1Translate}px)`,
+                    top: "64%",
+                    transform: "translateX(-50%) translateY(-50%)",
                 }}
             >
                 Driving innovation and improving lives
             </p>
 
-            {/* Phase 4–6: two-column content */}
-            {phase3 > 0.5 && (
-                <div className={`
-        flex flex-col md:flex-row gap-8 md:gap-4 lg:gap-16
-        ${isLarge ? "" : "items-center justify-center w-full"}
-    `}>
+            <div className="absolute inset-0 w-full h-full flex  flex-col lg:flex-row  ">
 
-                    {/* Left — tagline + button */}
-                    <div className={`
-            flex flex-col
-            ${isLarge
-                            ? "w-full px-8 max-w-sm lg:mx-0 lg:ml-18 md:ml-14 lg:pt-82 sm:pt-24 lg:pt-40"
-                            : "items-center w-full px-6 pt-[22vh]"  // ← sits just below heading on mobile
-                        }
-        `}>
-                        <Typography
-                            variant="h4"
-                            className="gradient-text w-full max-w-sm sm:max-w-md text-start items-start justify-start  leading-relaxed font-medium"
-                            style={{
-                                opacity: subtext2Opacity,
-                                transform: `translateY(${subtext2Translate}px)`,
-                                textAlign: isLarge ? "left" : "center",
-                            }}
-                        >
-                            Redefining <WordSwitcher /> across global
-                        </Typography>
-
-                        <div
-                            style={{
-                                opacity: buttonOpacity,
-                                transform: `translateY(${buttonTranslate}px)`,
-                            }}
-                        >
-                            <button className="gradient-text mt-2 py-2 px-2 text-base sm:text-lg lg:text-xl">
-                                Get In Touch
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Right — services list */}
-                    <div
-                        className={`
-                flex w-full
-                ${isLarge
-                                ? "pt-2 sm:pt-16 md:pt-20 lg:pt-24"
-                                : "justify-center pt-2"   // ← centered on mobile, less top spacing
-                            }
-            `}
-                        style={{
-                            opacity: rightOpacity,
-                            transform: `translateY(${rightTranslate}px)`,
-                        }}
+                {/* LEFT COL */}
+                <div
+                    ref={leftColRef}
+                    className="
+                        flex flex-col opacity-0 flex-shrink-0
+                        items-center text-center
+                        lg:items-start lg:text-left
+                        w-full lg:w-full xl:w-[50%] 2xl:w-[50%]
+                        pt-[62%] sm:pt-[58%] md:pt-[55%]
+                        lg:pt-[14%] 2xl:pt-[26%] lg:justify-center
+                        px-6 sm:px-8
+                        lg:pl-[5%] lg:pr-8
+                        2xl:pl-[8%]
+                    "
+                >
+                    <Typography
+                        variant="h4"
+                        className="
+                            gradient-text leading-relaxed font-medium
+                            text-center lg:text-left
+                            max-w-[240px] sm:max-w-[280px] lg:max-w-[300px] 2xl:max-w-[500px]
+                        "
                     >
-                        <div className={`
-                flex flex-col gap-2 sm:gap-8 lg:gap-4 px-4 sm:px-6 lg:px-4
-                ${isLarge ? "" : "items-center text-center max-w-lg"}
-            `}>
+                        Redefining <WordSwitcher /> across global
+                    </Typography>
 
-                            <div className="flex flex-col gap-2">
-                                <Typography variant="h4" color="secondary">UI/UX Design</Typography>
-                                <Typography variant="p" color="secondary" className="text-[14px]">
-                                    Human-centric design that prioritizes user flow and aesthetic precision to make your software as beautiful as it is functional.
-                                </Typography>
-                                <button className={`text-[#E36903] uppercase text-base sm:text-lg lg:text-xl ${isLarge ? "text-left" : "text-center"}`}>
-                                    Learn More
-                                </button>
-                            </div>
-
-                            <div className="flex flex-col gap-2">
-                                <Typography variant="h4" color="secondary">Web Development</Typography>
-                                <Typography variant="p" color="secondary" className="text-[14px]">
-                                    We build high-performance, responsive websites using the latest frameworks to ensure your digital presence is fast, secure, and scalable.
-                                </Typography>
-                                <button className={`text-[#E36903] uppercase text-base sm:text-lg lg:text-xl ${isLarge ? "text-left" : "text-center"}`}>
-                                    Learn More
-                                </button>
-                            </div>
-
-                            <div className="flex flex-col gap-2">
-                                <Typography variant="h4" color="secondary">App Development</Typography>
-                                <Typography variant="p" color="secondary" className="text-[14px]">
-                                    From iOS to Android, we engineer native and cross-platform mobile experiences that provide seamless functionality and elite performance.
-                                </Typography>
-                                <button className={`text-[#E36903] uppercase text-base sm:text-lg lg:text-xl ${isLarge ? "text-left" : "text-center"}`}>
-                                    Learn More
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-
+                    <button
+                        ref={buttonRef}
+                        className="
+                            gradient-text opacity-0
+                            mt-3 sm:mt-4 lg:mt-5
+                            py-2 px-0
+                            text-sm sm:text-base lg:text-2xl 2xl:text-4xl
+                        "
+                    >
+                        Get In Touch
+                    </button>
                 </div>
-            )}
-        </>
+
+                {/* RIGHT COL */}
+                <div
+                    ref={rightColRef}
+                    className="
+                        flex flex-1 w-full
+                        justify-center lg:justify-start
+                        items-center lg:items-center
+                        pt-4 sm:pt-6 lg:pt-0 2xl:pt-20
+                        lg:pl-8 xl:pl-12 2xl:pl-16
+                        px-4 sm:px-6 lg:px-0 2xl:px:8
+                    "
+                >
+                    <div
+                        className="
+                            flex flex-col
+                            gap-5 sm:gap-7 lg:gap-8 xl:gap-10 2xl:gap-10
+                            w-full
+                            max-w-xs sm:max-w-sm md:max-w-md lg:max-w-full
+                            items-center text-center
+                            lg:items-start lg:text-left
+                        "
+                    >
+                        {services.map((service, i) => (
+                            <div
+                                key={service.title}
+                                ref={(el) => { if (el) serviceItemsRef.current[i] = el; }}
+                                className="flex flex-col gap-1 sm:gap-2 opacity-0 w-full"
+                            >
+                                <h4
+                                    className="
+                                        text-gray-800 font-semibold
+                                        text-base sm:text-lg md:text-xl lg:text-2xl xl:text-4xl
+                                        text-center lg:text-left
+                                    "
+                                >
+                                    {service.title}
+                                </h4>
+                                <p
+                                    className="
+                                        text-gray-600 leading-relaxed
+                                        text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl
+                                        text-center lg:text-left
+                                        max-w-[280px] sm:max-w-sm lg:max-w-md xl:max-w-lg
+                                        mx-auto lg:mx-0
+                                    "
+                                >
+                                    {service.description}
+                                </p>
+                                <button
+                                    className="
+                                        text-[#E36903] uppercase font-medium tracking-wide
+                                        text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl
+                                        mt-1
+                                        text-center lg:text-left
+                                        hover:opacity-70 transition-opacity
+                                        w-fit mx-auto lg:mx-0
+                                    "
+                                >
+                                    Learn More
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };

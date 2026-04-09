@@ -17,7 +17,7 @@ export default function WordSwitcher() {
     }, []);
 
     return (
-        <span className="relative inline-block h-[1.6em] overflow-hidden align-bottom min-w-[140px]">
+        <span className="relative inline-block h-[1.6em] overflow-hidden align-bottom lg:min-w-[140px] 2xl:min-w-[220px]">
 
             <AnimatePresence mode="wait">
                 <motion.span

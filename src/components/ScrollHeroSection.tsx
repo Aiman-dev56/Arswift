@@ -31,19 +31,17 @@ const ScrollHeroSection = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Services fades out later — giving content time to breathe
-    const servicesFadeOut = Math.max(0, 1 - Math.min(1, Math.max(0, (progress - 0.88) / 0.06)));
+    // Services layer holds until 95%, then fades out
+    const servicesFadeOut = Math.max(0, 1 - Math.min(1, Math.max(0, (progress - 0.95) / 0.03)));
 
-    // Next section starts much later and comes in slowly
-    const nextSectionOpacity = Math.min(1, Math.max(0, (progress - 0.94) / 0.06));
-
-    // More travel distance = smoother feeling entrance
-    const nextSectionTranslate = 40 + (0 - 40) * Math.min(1, Math.max(0, (progress - 0.94) / 0.06));
+    // Next section only appears after services fully gone (98%+)
+    const nextSectionOpacity = Math.min(1, Math.max(0, (progress - 0.98) / 0.02));
+    const nextSectionTranslate = 60 + (0 - 60) * Math.min(1, Math.max(0, (progress - 0.98) / 0.02));
 
     return (
         <div
             ref={sectionRef}
-            className="lg:h-[500vh] md:h-[200vh] h-[700vh] -mt-[100vh]"
+            className="lg:h-[900vh] md:h-[200vh] h-[700vh] 2xl:h-[1200vh] -mt-[100vh]"
             style={{ backgroundColor: "#CED4DA" }}
             id="services"
         >
@@ -55,11 +53,9 @@ const ScrollHeroSection = () => {
                     style={{ opacity: servicesFadeOut }}
                 >
                     <div className="w-full max-w-7xl mx-auto px-6 lg:px-16 relative h-full">
-
                         <ServicesImages progress={progress} />
-                        <ServicesHeading progress={progress} isLarge={isLarge} />
-                        <ServicesText progress={progress} isLarge={isLarge} />
-
+                        <ServicesHeading scrollContainerRef={sectionRef} />
+                        <ServicesText scrollContainerRef={sectionRef} />
                     </div>
                 </div>
 
