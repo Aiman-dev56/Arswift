@@ -321,7 +321,7 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                         className="
                             gradient-text leading-relaxed font-medium
                             text-center lg:text-left
-                            max-w-[240px] sm:max-w-[280px] lg:max-w-[300px] 2xl:max-w-[500px]
+                            max-w-[280px] sm:max-w-[280px] md:max-w-[340px] lg:max-w-[300px] 2xl:max-w-[500px]
                         "
                     >
                         Redefining <WordSwitcher /> across global
