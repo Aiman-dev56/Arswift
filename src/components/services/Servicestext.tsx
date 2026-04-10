@@ -38,7 +38,7 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                             scroller: window,
                             start: "10% bottom",
                             end: "25% bottom",
-                            scrub: 3,
+                            scrub: 1,
                         },
                     }
                 );
@@ -63,8 +63,8 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                         scrollTrigger: {
                             trigger: scrollContainerRef.current,
                             scroller: window,
-                            start: "70% bottom",
-                            end: "82% bottom",
+                            start: "60% bottom",
+                            end: "72% bottom",
                             scrub: 1,
                         },
                     }
@@ -79,8 +79,8 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                         scrollTrigger: {
                             trigger: scrollContainerRef.current,
                             scroller: window,
-                            start: "80% bottom",
-                            end: "88% bottom",
+                            start: "64% bottom",
+                            end: "74% bottom",
                             scrub: 1,
                         },
                     }
@@ -96,8 +96,8 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                             scrollTrigger: {
                                 trigger: scrollContainerRef.current,
                                 scroller: window,
-                                start: `${88 + i * 10}% bottom`,
-                                end: `${90 + i * 10}% bottom`,
+                                start: `${70 + i * 10}% bottom`,
+                                end: `${98 + i * 10}% bottom`,
                                 scrub: 1,
                             },
                         }
@@ -127,8 +127,8 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                     scrollTrigger: {
                         trigger: scrollContainerRef.current,
                         scroller: window,
-                        start: "32% bottom",
-                        end: "48% bottom",
+                        start: "42% bottom",
+                        end: "58% bottom",
                         scrub: 1,
                     },
                 });
@@ -141,8 +141,8 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                         scrollTrigger: {
                             trigger: scrollContainerRef.current,
                             scroller: window,
-                            start: "50% bottom",
-                            end: "62% bottom",
+                            start: "58% bottom",
+                            end: "68% bottom",
                             scrub: 1,
                         },
                     }
@@ -217,8 +217,8 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                         scrollTrigger: {
                             trigger: scrollContainerRef.current,
                             scroller: window,
-                            start: "50% bottom",
-                            end: "62% bottom",
+                            start: "60% bottom",
+                            end: "72% bottom",
                             scrub: 1,
                         },
                     }
@@ -290,17 +290,16 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                     text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl
                     font-medium text-gray-700
                     max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg
-                    px-4 opacity-0
+                    px-4 opacity-0 lg:top-[64%] top-[58%]
                 "
                 style={{
-                    top: "64%",
                     transform: "translateX(-50%) translateY(-50%)",
                 }}
             >
                 Driving innovation and improving lives
             </p>
 
-            <div className="absolute inset-0 w-full h-full flex  flex-col lg:flex-row  ">
+            <div className="absolute inset-0 w-full h-full flex flex-col lg:flex-row  ">
 
                 {/* LEFT COL */}
                 <div
@@ -310,7 +309,7 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                         items-center text-center
                         lg:items-start lg:text-left
                         w-full lg:w-full xl:w-[50%] 2xl:w-[50%]
-                        pt-[62%] sm:pt-[58%] md:pt-[55%]
+                        pt-[36%] sm:pt-[58%] md:pt-[25%]
                         lg:pt-[14%] 2xl:pt-[26%] lg:justify-center
                         px-6 sm:px-8
                         lg:pl-[5%] lg:pr-8
@@ -332,7 +331,7 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                         ref={buttonRef}
                         className="
                             gradient-text opacity-0
-                            mt-3 sm:mt-4 lg:mt-5
+                            mt-2 sm:mt-4 lg:mt-5
                             py-2 px-0
                             text-sm sm:text-base lg:text-2xl 2xl:text-4xl
                         "
@@ -348,15 +347,14 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                         flex flex-1 w-full
                         justify-center lg:justify-start
                         items-center lg:items-center
-                        pt-4 sm:pt-6 lg:pt-0 2xl:pt-20
-                        lg:pl-8 xl:pl-12 2xl:pl-16
-                        px-4 sm:px-6 lg:px-0 2xl:px:8
+                        pt-2 sm:pt-4 md:pt-0 lg:pt-0 2xl:pt-20
+                        px-4 sm:px-6 lg:px-4 2xl:px:8
                     "
                 >
                     <div
                         className="
                             flex flex-col
-                            gap-5 sm:gap-7 lg:gap-8 xl:gap-10 2xl:gap-10
+                            gap-5 gap-8 sm:gap-8 md:gap-10 lg:gap-4 xl:gap-2 2xl:gap-10
                             w-full
                             max-w-xs sm:max-w-sm md:max-w-md lg:max-w-full
                             items-center text-center
@@ -372,7 +370,7 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                                 <h4
                                     className="
                                         text-gray-800 font-semibold
-                                        text-base sm:text-lg md:text-xl lg:text-2xl xl:text-4xl
+                                        text-base sm:text-lg md:text-2xl lg:text-xl xl:text-3xl
                                         text-center lg:text-left
                                     "
                                 >
@@ -381,9 +379,9 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                                 <p
                                     className="
                                         text-gray-600 leading-relaxed
-                                        text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl
+                                        text-xs sm:text-sm md:text-lg lg:text-base xl:text-lg 2xl:text-xl
                                         text-center lg:text-left
-                                        max-w-[280px] sm:max-w-sm lg:max-w-md xl:max-w-lg
+                                        max-w-[280px] sm:max-w-sm md:max-w-lg lg:max-w-md xl:max-w-lg
                                         mx-auto lg:mx-0
                                     "
                                 >
@@ -392,7 +390,7 @@ export const ServicesText = ({ scrollContainerRef }: Props) => {
                                 <button
                                     className="
                                         text-[#E36903] uppercase font-medium tracking-wide
-                                        text-xs sm:text-sm lg:text-base xl:text-lg 2xl:text-xl
+                                        text-xs sm:text-sm md:text-lg lg:text-base xl:text-lg 2xl:text-xl
                                         mt-1
                                         text-center lg:text-left
                                         hover:opacity-70 transition-opacity
