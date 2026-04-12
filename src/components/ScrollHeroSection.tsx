@@ -38,10 +38,12 @@ const ScrollHeroSection = () => {
     const nextSectionOpacity = Math.min(1, Math.max(0, (progress - 0.98) / 0.02));
     const nextSectionTranslate = 60 + (0 - 60) * Math.min(1, Math.max(0, (progress - 0.98) / 0.02));
 
+    const sectionHeight = isLarge ? "900vh" : "700vh";
+
     return (
         <div
             ref={sectionRef}
-            className="lg:h-[900vh] md:h-[800vh] h-[700vh] 2xl:h-[1200vh] -mt-[100vh]"
+            className={`${sectionHeight}  md:h-[800vh] 2xl:h-[1200vh] -mt-[100vh]`}
             style={{ backgroundColor: "#CED4DA" }}
             id="services"
         >
